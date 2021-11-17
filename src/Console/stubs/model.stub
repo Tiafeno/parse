@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use Cpp\Parse\ObjectModel;
+
+class DummyClass extends ObjectModel
+{
+    
+}
