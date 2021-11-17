@@ -15,19 +15,8 @@ This library pretends to make Parse usable in a Eloquent-like manner. For Larave
 Install the library with Composer:
 
    ``
-   composer config repositories.cpp-it vcs https://cppsystem.local:30000/cpp-it/parse.git
+   composer config repositories.Tiafeno vcs https://github.com/Tiafeno/parse.git
    ``
-
-Change composer.json file
-```json
-   {
-        "config": {
-            "preferred-install": "dist",
-            "disable-tls": true,
-            "secure-http": false
-        }    
-    }
-```
     
    ````
    composer require cpp/parse
