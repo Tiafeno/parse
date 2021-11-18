@@ -3,6 +3,7 @@
 namespace Cpp\Parse;
 
 use Cpp\Parse\SessionStorage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Parse\HttpClients\ParseCurlHttpClient;
 use Parse\ParseClient;
@@ -83,8 +84,12 @@ class ParseServiceProvider extends ServiceProvider
             ParseClient::initialize($config['app_id'], $config['rest_key'], $config['master_key']);
             ParseClient::setServerURL($config['server_url'], $config['mount_path']);
             ParseClient::setHttpClient(new ParseCurlHttpClient());
+            $health = ParseClient::getServerHealth();
+            if ($health['status'] != 200) {
+                Log::error($health['error_message']);
+            }
         } catch(ParseException $e) {
-            dd($e);
+            Log::critical($e->getMessage());
         }
 
         // Register providers
