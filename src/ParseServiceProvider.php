@@ -77,21 +77,6 @@ class ParseServiceProvider extends ServiceProvider
      */
     protected function setupParse()
     {
-        $config = $this->app->config->get('parse');
-
-        try {
-            ParseClient::setStorage(new SessionStorage());
-            ParseClient::initialize($config['app_id'], $config['rest_key'], $config['master_key']);
-            ParseClient::setServerURL($config['server_url'], $config['mount_path']);
-            ParseClient::setHttpClient(new ParseCurlHttpClient());
-            $health = ParseClient::getServerHealth();
-            if ($health['status'] != 200) {
-                Log::error($health['error_message']);
-            }
-        } catch(ParseException $e) {
-            Log::critical($e->getMessage());
-        }
-
         // Register providers
         Auth::provider('parse', function($app, array $config) {
             return new UserProvider($config['model']);
